@@ -94,6 +94,7 @@ var traction_slow = 0.7  # Low-speed traction
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
+	load_car_data()
 	wheel_base = (get_node("CarCollision").get_polygon()[19].x - 30) - \
 					get_node("CarCollision").get_polygon()[4].x + 30
 	gear = gear_shift[gear_index]
@@ -107,6 +108,30 @@ func _ready():
 	$EngineSoundSub.volume_db += (get_node("/root/GameOption").get_volume())
 	$EngineSoundBass.volume_db += (get_node("/root/GameOption").get_volume())
 	$Heartbeat.volume_db += (get_node("/root/GameOption").get_volume())
+
+func load_car_data():
+	var car_data = get_node_or_null("/root/CarData")
+	var tune_data = get_node_or_null("/root/TuneData")
+	
+	if car_data and tune_data:
+		var data = car_data.get_selected_car_data()
+		engine_power = tune_data.engine_power
+		weight = tune_data.weight
+		steering_weight_multiplier = tune_data.steering_weight_multiplier
+		brake_power = tune_data.brake_power
+		final_drive_ratio = tune_data.final_drive_ratio
+		gear_ratio = tune_data.gear_ratio.duplicate()
+		max_rpm = tune_data.max_rpm
+		traction_fast = tune_data.traction_fast
+		traction_slow = tune_data.traction_slow
+		slip_speed = tune_data.slip_speed
+		friction = tune_data.friction
+		drag = tune_data.drag
+		
+		# Load car sprite
+		var sprite = get_node_or_null("Sprite2D")
+		if sprite and ResourceLoader.exists(data["sprite"]):
+			sprite.texture = load(data["sprite"])
 	
 func _input(event):
 	if event.is_action_pressed("ui_shift_up") || event.is_action_pressed("ui_shift_down"):

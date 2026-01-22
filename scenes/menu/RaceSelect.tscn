@@ -1,6 +1,8 @@
-[gd_scene load_steps=26 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=27 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
+[ext_resource type="PackedScene" uid="uid://car_select_scene" path="res://scenes/menu/CarSelect.tscn" id="car_select"]
+[ext_resource type="PackedScene" uid="uid://track_select_scene" path="res://scenes/menu/TrackSelect.tscn" id="track_select"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="3_ts0pq"]
 [ext_resource type="Script" path="res://scenes/menu/TuneModeButton.gd" id="4_cyhkf"]
@@ -70,35 +72,21 @@ offset_bottom = 148.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="Control"]
+[node name="TrackSelectPanel" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
 anchor_bottom = 0.5
-offset_top = -153.0
-offset_right = 494.0
-offset_bottom = 153.0
+offset_top = -160.0
+offset_right = 360.0
+offset_bottom = 160.0
 grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxEmpty_tkf47")
 
-[node name="TextureRect" type="TextureRect" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 61.0
-offset_top = 16.0
-offset_right = 529.0
-offset_bottom = 279.0
-scale = Vector2(0.8, 0.8)
-texture = ExtResource("2_q6y82")
-
-[node name="Label" type="Label" parent="Control/Panel"]
-layout_mode = 0
-offset_left = 160.0
-offset_top = 253.0
-offset_right = 350.0
-offset_bottom = 282.0
-theme_override_fonts/font = ExtResource("3_ts0pq")
-theme_override_font_sizes/font_size = 32
-text = "Map: Akina"
+[node name="TrackSelect" parent="Control/TrackSelectPanel" instance=ExtResource("track_select")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Control"]
 layout_mode = 0
@@ -251,6 +239,26 @@ offset_right = 88.0
 offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("3_ts0pq")
 text = "SET MUSIC"
+
+[node name="CarSelectPanel" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -340.0
+offset_top = -420.0
+offset_right = -20.0
+offset_bottom = -120.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="CarSelect" parent="CarSelectPanel" instance=ExtResource("car_select")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
 
 [connection signal="pressed" from="Control/VBoxContainer/TimeAttackButton" to="Control/VBoxContainer/TimeAttackButton" method="_on_pressed"]
 [connection signal="pressed" from="Control/VBoxContainer/TuneModeButton" to="Control/VBoxContainer/TuneModeButton" method="_on_pressed"]

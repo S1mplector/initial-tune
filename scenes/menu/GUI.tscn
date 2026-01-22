@@ -144,11 +144,19 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -198.0
-offset_top = -134.0
+offset_left = -240.0
+offset_top = -180.0
 grow_horizontal = 0
 grow_vertical = 0
 script = ExtResource("4_lpvv8")
+
+[node name="TimerBG" type="ColorRect" parent="Stopwatch"]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 40.0
+offset_right = 240.0
+offset_bottom = 180.0
+color = Color(0, 0, 0, 0.5)
 
 [node name="Label" type="Label" parent="Stopwatch"]
 layout_mode = 1
@@ -157,15 +165,15 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -167.0
-offset_top = -24.5
+offset_left = -200.0
+offset_top = -50.0
 offset_right = -41.0
-offset_bottom = -1.5
+offset_bottom = -27.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_krarw")
-theme_override_font_sizes/font_size = 24
-text = "YOUR TIME"
+theme_override_font_sizes/font_size = 20
+text = "CURRENT TIME"
 horizontal_alignment = 2
 
 [node name="Time" type="Label" parent="Stopwatch"]
@@ -175,13 +183,51 @@ anchor_left = 1.0
 anchor_top = 0.5
 anchor_right = 1.0
 anchor_bottom = 0.5
-offset_left = -193.0
-offset_top = 4.5
+offset_left = -200.0
+offset_top = -25.0
 offset_right = -41.0
-offset_bottom = 33.5
+offset_bottom = 15.0
 grow_horizontal = 0
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("1_krarw")
-theme_override_font_sizes/font_size = 32
-text = "0"
+theme_override_font_sizes/font_size = 36
+theme_override_colors/font_color = Color(0.4, 1, 0.4, 1)
+text = "0.00"
+horizontal_alignment = 2
+
+[node name="BestLabel" type="Label" parent="Stopwatch"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -41.0
+offset_bottom = 43.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_krarw")
+theme_override_font_sizes/font_size = 16
+text = "BEST TIME"
+horizontal_alignment = 2
+
+[node name="BestTime" type="Label" parent="Stopwatch"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 45.0
+offset_right = -41.0
+offset_bottom = 75.0
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_krarw")
+theme_override_font_sizes/font_size = 28
+theme_override_colors/font_color = Color(1, 0.85, 0.3, 1)
+text = "---"
 horizontal_alignment = 2

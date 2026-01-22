@@ -1,0 +1,92 @@
+[gd_scene load_steps=3 format=3 uid="uid://track_select_scene"]
+
+[ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="1_font"]
+[ext_resource type="Script" path="res://scenes/menu/TrackSelect.gd" id="2_script"]
+
+[node name="TrackSelect" type="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource("2_script")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0, 0, 0, 0.5)
+
+[node name="TrackName" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 10.0
+offset_right = 320.0
+offset_bottom = 45.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 28
+text = "Map: Akina"
+
+[node name="TrackPreview" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 55.0
+offset_right = 320.0
+offset_bottom = 200.0
+expand_mode = 1
+stretch_mode = 5
+
+[node name="LeftButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 210.0
+offset_right = 60.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 24
+text = "<"
+
+[node name="RightButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 280.0
+offset_top = 210.0
+offset_right = 320.0
+offset_bottom = 250.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 24
+text = ">"
+
+[node name="TrackDescription" type="Label" parent="."]
+layout_mode = 0
+offset_left = 70.0
+offset_top = 215.0
+offset_right = 270.0
+offset_bottom = 245.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 11
+text = "The legendary downhill course."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="DifficultyLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 255.0
+offset_right = 200.0
+offset_bottom = 280.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 14
+text = "Difficulty: Medium"
+
+[node name="BestTimeLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 280.0
+offset_right = 320.0
+offset_bottom = 305.0
+theme_override_fonts/font = ExtResource("1_font")
+theme_override_font_sizes/font_size = 14
+text = "Record: 64.37s by Chamikey"
+
+[connection signal="pressed" from="LeftButton" to="." method="_on_left_button_pressed"]
+[connection signal="pressed" from="RightButton" to="." method="_on_right_button_pressed"]

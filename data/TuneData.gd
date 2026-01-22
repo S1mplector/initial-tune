@@ -65,14 +65,38 @@ var traction_fast = 0.1  # High-speed traction
 var traction_slow = 0.7  # Low-speed traction
 
 var default_tune = 0
+var car_data = null
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	default_tune = get_node("/root/TuneDataDefault")
+	car_data = get_node("/root/CarData")
 
 func reset_tune():
 	engine_power = default_tune.engine_power
-	gear_ratio = default_tune.gear_ratio
+	gear_ratio = default_tune.gear_ratio.duplicate()
 	final_drive_ratio = default_tune.final_drive_ratio
 	steering_weight_multiplier = default_tune.steering_weight_multiplier
 	brake_power = default_tune.brake_power
 	weight = default_tune.weight
+
+func load_car_defaults(car_type: int = -1):
+	if car_data == null:
+		car_data = get_node("/root/CarData")
+	
+	if car_type < 0:
+		car_type = car_data.selected_car
+	
+	var data = car_data.get_car_data(car_type)
+	engine_power = data["engine_power"]
+	weight = data["weight"]
+	steering_weight_multiplier = data["steering_weight_multiplier"]
+	brake_power = data["brake_power"]
+	final_drive_ratio = data["final_drive_ratio"]
+	gear_ratio = data["gear_ratio"].duplicate()
+	max_rpm = data["max_rpm"]
+	traction_fast = data["traction_fast"]
+	traction_slow = data["traction_slow"]
+	slip_speed = data["slip_speed"]
+	friction = data["friction"]
+	drag = data["drag"]
