@@ -7,6 +7,9 @@ var lets_go = 0
 # All music tracks for random playback
 var all_music = []
 
+# Control mode: false = keyboard, true = mouse
+var mouse_control_enabled = false
+
 var main_menu = 0
 var main_menu_button = 0
 var race_select = 0

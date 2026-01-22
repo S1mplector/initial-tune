@@ -1,6 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://b8nchxi21812j"]
+[gd_scene load_steps=15 format=3 uid="uid://b8nchxi21812j"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_chyu6"]
+[ext_resource type="Script" path="res://scenes/menu/ControlModeSelect.gd" id="control_mode_script"]
 [ext_resource type="Texture2D" uid="uid://bcbfp2upik3n4" path="res://assets/controls/Throttle.png" id="2_5x3k5"]
 [ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="2_v3smv"]
 [ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="3_h2jqw"]
@@ -228,6 +229,43 @@ theme_override_fonts/font = ExtResource("3_ik442")
 theme_override_font_sizes/font_size = 40
 text = "Gear Down"
 
+[node name="ControlModeSelect" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -200.0
+offset_top = 140.0
+offset_right = 200.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="Control/ControlModeSelect"]
+layout_mode = 0
+offset_right = 180.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 32
+text = "CONTROL MODE:"
+
+[node name="OptionButton" type="OptionButton" parent="Control/ControlModeSelect"]
+layout_mode = 0
+offset_left = 200.0
+offset_right = 400.0
+offset_bottom = 40.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 28
+item_count = 2
+selected = 0
+popup/item_0/text = "Keyboard"
+popup/item_0/id = 0
+popup/item_1/text = "Mouse"
+popup/item_1/id = 1
+script = ExtResource("control_mode_script")
+
 [node name="Label" type="Label" parent="Control"]
 layout_mode = 1
 anchors_preset = 7
@@ -242,7 +280,7 @@ grow_horizontal = 2
 grow_vertical = 0
 theme_override_fonts/font = ExtResource("3_ik442")
 theme_override_font_sizes/font_size = 20
-text = "*Customizable control is not yet available"
+text = "Mouse: Left Click=Gas, Right Click=Brake, Cursor=Steer"
 horizontal_alignment = 1
 
 [node name="BackButton" type="Control" parent="."]
