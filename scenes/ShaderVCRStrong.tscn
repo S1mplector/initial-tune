@@ -1,0 +1,37 @@
+[gd_scene load_steps=3 format=3 uid="uid://vcr_strong_shader"]
+
+[ext_resource type="Shader" path="res://shaders/crt.gdshader" id="1_nhbgm"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_strong"]
+shader = ExtResource("1_nhbgm")
+shader_parameter/overlay = true
+shader_parameter/scanlines_opacity = 0.15
+shader_parameter/scanlines_width = 0.1
+shader_parameter/grille_opacity = 0.08
+shader_parameter/resolution = Vector2(1280, 720)
+shader_parameter/pixelate = true
+shader_parameter/roll = true
+shader_parameter/roll_speed = 4.0
+shader_parameter/roll_size = 40.0
+shader_parameter/roll_variation = 0.5
+shader_parameter/distort_intensity = 0.004
+shader_parameter/noise_opacity = 0.06
+shader_parameter/noise_speed = 5.0
+shader_parameter/static_noise_intensity = 0.08
+shader_parameter/aberration = 0.02
+shader_parameter/brightness = 1.3
+shader_parameter/discolor = true
+shader_parameter/warp_amount = 0.5
+shader_parameter/clip_warp = false
+shader_parameter/vignette_intensity = 0.5
+shader_parameter/vignette_opacity = 0.6
+
+[node name="ShaderVCRStrong" type="ColorRect"]
+material = SubResource("ShaderMaterial_strong")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)

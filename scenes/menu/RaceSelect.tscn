@@ -196,6 +196,31 @@ theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("3_ts0pq")
 text = "GAMEPAD MODE"
 
+[node name="MouseControl" type="Control" parent="Additional"]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -220.0
+offset_top = 40.0
+offset_right = -20.0
+offset_bottom = 70.0
+grow_horizontal = 0
+
+[node name="MouseCheckBox" type="CheckBox" parent="Additional/MouseControl"]
+layout_mode = 0
+offset_right = 30.0
+offset_bottom = 30.0
+
+[node name="MouseLabel" type="Label" parent="Additional/MouseControl"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 5.0
+offset_right = 200.0
+offset_bottom = 25.0
+theme_override_fonts/font = ExtResource("3_ts0pq")
+text = "MOUSE CONTROL"
+
 [node name="MusicSelect" type="Control" parent="Additional"]
 layout_mode = 1
 anchors_preset = 3
@@ -217,19 +242,15 @@ offset_right = 301.0
 offset_bottom = 32.0
 theme = SubResource("Theme_x1oxl")
 theme_override_fonts/font = ExtResource("3_ts0pq")
-item_count = 5
+item_count = 3
 selected = 0
 allow_reselect = true
-popup/item_0/text = "Guitar Loneliness"
+popup/item_0/text = "Random"
 popup/item_0/id = 0
-popup/item_1/text = "DOTA"
+popup/item_1/text = "Thunder"
 popup/item_1/id = 1
-popup/item_2/text = "Dragostea Din Tei"
+popup/item_2/text = "Let's Go Come On"
 popup/item_2/id = 2
-popup/item_3/text = "Moonlight Shadow"
-popup/item_3/id = 3
-popup/item_4/text = "Rockefeller Street"
-popup/item_4/id = 4
 
 [node name="Label" type="Label" parent="Additional/MusicSelect"]
 layout_mode = 0
@@ -247,10 +268,10 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -340.0
-offset_top = -420.0
+offset_left = -420.0
+offset_top = -600.0
 offset_right = -20.0
-offset_bottom = -120.0
+offset_bottom = -40.0
 grow_horizontal = 0
 grow_vertical = 0
 

@@ -4,8 +4,15 @@ extends CharacterBody2D
 var type_circ = 0
 var temp_speed = 0
 var is_mouse_and_keyboard = true
+var is_mouse_control = false
 var enabled_input = true
 var light_switch = true
+
+# Drift smoke
+var is_drifting = false
+var drift_threshold = 0.6
+@onready var smoke_left: GPUParticles2D = null
+@onready var smoke_right: GPUParticles2D = null
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -95,6 +102,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready():
 	load_car_data()
+	setup_smoke_particles()
 	wheel_base = (get_node("CarCollision").get_polygon()[19].x - 30) - \
 					get_node("CarCollision").get_polygon()[4].x + 30
 	gear = gear_shift[gear_index]
@@ -108,6 +116,45 @@ func _ready():
 	$EngineSoundSub.volume_db += (get_node("/root/GameOption").get_volume())
 	$EngineSoundBass.volume_db += (get_node("/root/GameOption").get_volume())
 	$Heartbeat.volume_db += (get_node("/root/GameOption").get_volume())
+
+func setup_smoke_particles():
+	smoke_left = GPUParticles2D.new()
+	smoke_left.name = "SmokeLeft"
+	smoke_left.emitting = false
+	smoke_left.amount = 20
+	smoke_left.lifetime = 0.8
+	smoke_left.position = Vector2(-70, 25)
+	
+	var material_left = ParticleProcessMaterial.new()
+	material_left.direction = Vector3(0, -1, 0)
+	material_left.spread = 30.0
+	material_left.initial_velocity_min = 50.0
+	material_left.initial_velocity_max = 100.0
+	material_left.gravity = Vector3(0, -50, 0)
+	material_left.scale_min = 0.5
+	material_left.scale_max = 1.5
+	material_left.color = Color(0.8, 0.8, 0.8, 0.6)
+	smoke_left.process_material = material_left
+	add_child(smoke_left)
+	
+	smoke_right = GPUParticles2D.new()
+	smoke_right.name = "SmokeRight"
+	smoke_right.emitting = false
+	smoke_right.amount = 20
+	smoke_right.lifetime = 0.8
+	smoke_right.position = Vector2(-70, -25)
+	
+	var material_right = ParticleProcessMaterial.new()
+	material_right.direction = Vector3(0, -1, 0)
+	material_right.spread = 30.0
+	material_right.initial_velocity_min = 50.0
+	material_right.initial_velocity_max = 100.0
+	material_right.gravity = Vector3(0, -50, 0)
+	material_right.scale_min = 0.5
+	material_right.scale_max = 1.5
+	material_right.color = Color(0.8, 0.8, 0.8, 0.6)
+	smoke_right.process_material = material_right
+	add_child(smoke_right)
 
 func load_car_data():
 	var car_data = get_node_or_null("/root/CarData")
@@ -175,6 +222,11 @@ func _physics_process(delta):
 	move_and_slide()
 
 func get_input():
+	# Mouse control mode
+	if is_mouse_control and enabled_input:
+		get_mouse_input()
+		return
+	
 	# Car Steering Wheel Data, Higher Turn -> Steering Wheel Turned More
 	if enabled_input and Input.is_action_pressed("ui_left") || Input.is_action_pressed("ui_right"):
 		steering_weight = clamp(log(velocity.length()), 0, 99) * steering_weight_multiplier
@@ -294,6 +346,9 @@ func calculate_steering(delta):
 		velocity = velocity.lerp(-new_heading * velocity.length(), traction)
 	rotation = new_heading.angle()
 	
+	# Drift detection and smoke effects
+	update_drift_smoke()
+	
 func apply_friction():
 	if velocity.length() < 5:
 		velocity = Vector2.ZERO
@@ -369,3 +424,66 @@ func _cubic_bezier(p0: Vector2, p1: Vector2, p2: Vector2, p3: Vector2, t: float)
 	var r1 = q1.lerp(q2, t)
 	var s = r0.lerp(r1, t)
 	return s
+
+func get_mouse_input():
+	# Get mouse position relative to car
+	var mouse_pos = get_global_mouse_position()
+	var to_mouse = mouse_pos - global_position
+	var target_angle = to_mouse.angle()
+	var angle_diff = wrapf(target_angle - rotation, -PI, PI)
+	
+	# Steering based on mouse position
+	steering_weight = clamp(log(velocity.length()), 0, 99) * steering_weight_multiplier
+	var max_steer = steering_angle - (steering_angle * max(steering_weight - 3, 0) * 1.2)
+	steer_angle = clamp(rad_to_deg(angle_diff) * 0.5, -max_steer, max_steer)
+	turn = steer_angle
+	
+	# Gas with left mouse button
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+		gas = clamp(gas + gas_rate, 0, 1)
+	else:
+		gas = move_toward(gas, 0, gas_rate)
+	
+	# Brake with right mouse button
+	if Input.is_mouse_button_pressed(MOUSE_BUTTON_RIGHT):
+		counter_force += velocity * brake_power / clamp(log(velocity.length()) - 3, 0.1, 2)
+	
+	# Calculate acceleration
+	if gear_index <= 1:
+		if gas > 0.1:
+			rpm_rev = clamp(rpm_rev + (gas_rate * gas), 0, 1)
+			rpm = clamp(_cubic_bezier(Vector2(0,0), Vector2(0.54,0.33), Vector2(0.41,1.35), 
+									Vector2(1,1), rpm_rev).y, 0.2, 1) * max_rpm
+		else:
+			rpm = move_toward(rpm, 0, rpm_decay)
+			rpm_rev = move_toward(rpm_rev, 0, rpm_decay)
+	else:
+		rpm = velocity.length() * gear_ratio[gear_index] * final_drive_ratio
+		if abs(rpm) > max_rpm:
+			rpm = move_toward(rpm, max_rpm, abs(rpm) - max_rpm)
+		delivered_power = clamp(_cubic_bezier(Vector2(0,0), Vector2(0.54,0.33), Vector2(0.41,1.35),
+								Vector2(1,1), rpm/max_rpm).y, 0.2, 1) * engine_power + 50
+		torque = gas * delivered_power * gear_effectivity
+		if abs(rpm) < 3000:
+			torque *= gear_ratio[gear_index] * (1 - _cubic_bezier(Vector2(0.1,0.1),
+					Vector2(0.93,0.05), Vector2(0.76,0.75), Vector2(1,1), rpm/max_rpm).y)
+		acceleration = transform.x * torque
+
+func update_drift_smoke():
+	# Check if car is sliding (velocity direction differs from car heading)
+	if velocity.length() > 200:
+		var velocity_angle = velocity.angle()
+		var heading_angle = rotation
+		var angle_diff = abs(wrapf(velocity_angle - heading_angle, -PI, PI))
+		
+		# If angle difference is significant, we're drifting
+		is_drifting = angle_diff > drift_threshold and abs(steer_angle) > 5
+		
+		if smoke_left and smoke_right:
+			smoke_left.emitting = is_drifting
+			smoke_right.emitting = is_drifting
+	else:
+		is_drifting = false
+		if smoke_left and smoke_right:
+			smoke_left.emitting = false
+			smoke_right.emitting = false

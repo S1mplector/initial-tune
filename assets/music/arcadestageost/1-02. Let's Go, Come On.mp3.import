@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://dafj4uqmrhhfp"
+path="res://.godot/imported/1-02. Let's Go, Come On.mp3-f29b5627dac8e6051566192dc883e0f0.mp3str"
+
+[deps]
+
+source_file="res://assets/music/arcadestageost/1-02. Let's Go, Come On.mp3"
+dest_files=["res://.godot/imported/1-02. Let's Go, Come On.mp3-f29b5627dac8e6051566192dc883e0f0.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

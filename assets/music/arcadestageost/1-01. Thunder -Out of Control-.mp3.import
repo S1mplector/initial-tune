@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cyayr14ivxn21"
+path="res://.godot/imported/1-01. Thunder -Out of Control-.mp3-bf01111e95f20831f2cf6118c9f80a4d.mp3str"
+
+[deps]
+
+source_file="res://assets/music/arcadestageost/1-01. Thunder -Out of Control-.mp3"
+dest_files=["res://.godot/imported/1-01. Thunder -Out of Control-.mp3-bf01111e95f20831f2cf6118c9f80a4d.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

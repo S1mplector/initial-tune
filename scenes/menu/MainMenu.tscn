@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d0tje37sk87ie"]
+[gd_scene load_steps=4 format=3 uid="uid://d0tje37sk87ie"]
 
 [ext_resource type="VideoStream" path="res://assets/initialtunebgvideoogv.ogv" id="1_70hhv"]
 [ext_resource type="FontFile" uid="uid://bxal3o2bgkqeo" path="res://assets/fonts/VCR_OSD_MONO_1.001.ttf" id="10_wygb3"]
+[ext_resource type="PackedScene" uid="uid://audio_visualizer" path="res://scenes/menu/AudioVisualizer.tscn" id="11_viz"]
 
 [node name="MainMenu" type="Node"]
 
@@ -71,3 +72,19 @@ offset_bottom = 79.0
 theme_override_fonts/font = ExtResource("10_wygb3")
 theme_override_font_sizes/font_size = 40
 text = "APR.18 1990"
+
+[node name="VisualizerContainer" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -160.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="AudioVisualizer" parent="VisualizerContainer" instance=ExtResource("11_viz")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0

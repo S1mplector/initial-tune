@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://audio_visualizer"]
+
+[ext_resource type="Script" path="res://scenes/menu/AudioVisualizer.gd" id="1_script"]
+
+[node name="AudioVisualizer" type="Control"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+script = ExtResource("1_script")
+bar_count = 48
+bar_width = 8.0
+bar_gap = 3.0
+max_height = 120.0
+min_height = 4.0
+smoothing = 0.2
+bar_color = Color(1, 0.3, 0.5, 0.7)
+glow_color = Color(1, 0.4, 0.6, 0.3)

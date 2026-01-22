@@ -59,28 +59,28 @@ offset_bottom = 152.0
 layout_mode = 0
 offset_right = 1100.0
 offset_bottom = 400.0
-scale = Vector2(0.4, 0.4)
+scale = Vector2(0.6, 0.6)
 texture = ExtResource("2_j6nym")
 
 [node name="SpeedMeter" type="TextureRect" parent="BottomUI/Speedometer"]
 layout_mode = 0
-offset_left = -149.0
-offset_top = 68.0
-offset_right = 208.0
-offset_bottom = 124.0
+offset_left = -120.0
+offset_top = 102.0
+offset_right = 237.0
+offset_bottom = 158.0
 rotation = -0.296279
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.375, 0.375)
 pivot_offset = Vector2(285, 30)
 texture = ExtResource("3_msohk")
 
 [node name="RpmMeter" type="TextureRect" parent="BottomUI/Speedometer"]
 layout_mode = 0
-offset_left = 10.0
-offset_top = 66.0
-offset_right = 367.0
-offset_bottom = 122.0
+offset_left = 15.0
+offset_top = 99.0
+offset_right = 372.0
+offset_bottom = 155.0
 rotation = -0.35249
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.375, 0.375)
 pivot_offset = Vector2(285, 30)
 texture = ExtResource("3_msohk")
 
@@ -113,27 +113,27 @@ text = "0"
 [node name="Gear" type="Control" parent="BottomUI"]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 582.0
-offset_top = 16.0
-offset_right = 621.0
-offset_bottom = 91.0
+offset_left = 680.0
+offset_top = 10.0
+offset_right = 750.0
+offset_bottom = 120.0
 
 [node name="Label" type="Label" parent="BottomUI/Gear"]
 layout_mode = 0
-offset_right = 38.0
-offset_bottom = 15.0
+offset_right = 60.0
+offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("1_krarw")
-theme_override_font_sizes/font_size = 16
+theme_override_font_sizes/font_size = 24
 text = "GEAR"
 
 [node name="Gear" type="Label" parent="BottomUI/Gear"]
 layout_mode = 0
-offset_top = 17.0
-offset_right = 38.0
-offset_bottom = 74.0
+offset_top = 26.0
+offset_right = 60.0
+offset_bottom = 110.0
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("1_krarw")
-theme_override_font_sizes/font_size = 64
+theme_override_font_sizes/font_size = 80
 text = "0"
 
 [node name="Stopwatch" type="Control" parent="."]
