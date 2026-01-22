@@ -1,6 +1,7 @@
-[gd_scene load_steps=27 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=28 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
+[ext_resource type="Script" path="res://scenes/menu/TopLeftBack.gd" id="topleft_back"]
 [ext_resource type="PackedScene" uid="uid://car_select_scene" path="res://scenes/menu/CarSelect.tscn" id="car_select"]
 [ext_resource type="PackedScene" uid="uid://track_select_scene" path="res://scenes/menu/TrackSelect.tscn" id="track_select"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
@@ -201,23 +202,23 @@ layout_mode = 1
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
-offset_left = -220.0
-offset_top = 40.0
-offset_right = -20.0
-offset_bottom = 70.0
+offset_left = -360.0
+offset_top = 8.0
+offset_right = -180.0
+offset_bottom = 38.0
 grow_horizontal = 0
 
 [node name="MouseCheckBox" type="CheckBox" parent="Additional/MouseControl"]
 layout_mode = 0
-offset_right = 30.0
-offset_bottom = 30.0
+offset_right = 24.0
+offset_bottom = 24.0
 
 [node name="MouseLabel" type="Label" parent="Additional/MouseControl"]
 layout_mode = 0
-offset_left = 35.0
-offset_top = 5.0
-offset_right = 200.0
-offset_bottom = 25.0
+offset_left = 28.0
+offset_top = 2.0
+offset_right = 180.0
+offset_bottom = 22.0
 theme_override_fonts/font = ExtResource("3_ts0pq")
 text = "MOUSE CONTROL"
 
@@ -260,6 +261,16 @@ offset_right = 88.0
 offset_bottom = 24.0
 theme_override_fonts/font = ExtResource("3_ts0pq")
 text = "SET MUSIC"
+
+[node name="TopLeftBack" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 140.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("3_ts0pq")
+theme_override_font_sizes/font_size = 28
+text = "< BACK"
+script = ExtResource("topleft_back")
 
 [node name="CarSelectPanel" type="Control" parent="."]
 layout_mode = 1
