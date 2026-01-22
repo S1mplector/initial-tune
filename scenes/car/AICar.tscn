@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://ai_car_scene"]
+
+[ext_resource type="Script" path="res://scenes/car/AICarController.gd" id="1_ai"]
+[ext_resource type="Texture2D" uid="uid://cvjcbonkjqdoe" path="res://assets/cars/ae86.png" id="2_sprite"]
+
+[node name="AICar" type="CharacterBody2D"]
+script = ExtResource("1_ai")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_sprite")
+scale = Vector2(0.15, 0.15)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = null

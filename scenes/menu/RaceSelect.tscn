@@ -1,7 +1,8 @@
-[gd_scene load_steps=28 format=3 uid="uid://bopov2612gay6"]
+[gd_scene load_steps=29 format=3 uid="uid://bopov2612gay6"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_ilpcs"]
 [ext_resource type="Script" path="res://scenes/menu/TopLeftBack.gd" id="topleft_back"]
+[ext_resource type="Script" path="res://scenes/menu/RaceModeButton.gd" id="race_mode_script"]
 [ext_resource type="PackedScene" uid="uid://car_select_scene" path="res://scenes/menu/CarSelect.tscn" id="car_select"]
 [ext_resource type="PackedScene" uid="uid://track_select_scene" path="res://scenes/menu/TrackSelect.tscn" id="track_select"]
 [ext_resource type="Texture2D" uid="uid://coyij5td4nppd" path="res://assets/akinamap.png" id="2_q6y82"]
@@ -110,6 +111,13 @@ texture_hover = ExtResource("15_2hdg5")
 texture_disabled = ExtResource("16_arw8o")
 texture_focused = ExtResource("13_17lhj")
 script = ExtResource("8_8cogv")
+
+[node name="RaceModeButton" type="Button" parent="Control/VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ts0pq")
+theme_override_font_sizes/font_size = 36
+text = "RACE MODE (vs AI)"
+script = ExtResource("race_mode_script")
 
 [node name="Tune" type="Label" parent="Control/VBoxContainer"]
 layout_mode = 2

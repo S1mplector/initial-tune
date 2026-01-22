@@ -10,9 +10,10 @@ var light_switch = true
 
 # Drift smoke
 var is_drifting = false
-var drift_threshold = 0.6
+var drift_threshold = 0.4
 @onready var smoke_left: GPUParticles2D = null
 @onready var smoke_right: GPUParticles2D = null
+
 
 # General Default Value
 var turn = 0 # Rate at which steer angle increases
@@ -118,43 +119,62 @@ func _ready():
 	$Heartbeat.volume_db += (get_node("/root/GameOption").get_volume())
 
 func setup_smoke_particles():
+	# Create smoke texture
+	var smoke_texture = PlaceholderTexture2D.new()
+	smoke_texture.size = Vector2(64, 64)
+	
+	# Left tire smoke
 	smoke_left = GPUParticles2D.new()
 	smoke_left.name = "SmokeLeft"
 	smoke_left.emitting = false
-	smoke_left.amount = 20
-	smoke_left.lifetime = 0.8
-	smoke_left.position = Vector2(-70, 25)
+	smoke_left.amount = 50
+	smoke_left.lifetime = 1.5
+	smoke_left.position = Vector2(-55, 18)
+	smoke_left.z_index = 10
 	
 	var material_left = ParticleProcessMaterial.new()
-	material_left.direction = Vector3(0, -1, 0)
-	material_left.spread = 30.0
-	material_left.initial_velocity_min = 50.0
-	material_left.initial_velocity_max = 100.0
-	material_left.gravity = Vector3(0, -50, 0)
-	material_left.scale_min = 0.5
-	material_left.scale_max = 1.5
-	material_left.color = Color(0.8, 0.8, 0.8, 0.6)
+	material_left.direction = Vector3(-1, 0, 0)
+	material_left.spread = 60.0
+	material_left.initial_velocity_min = 100.0
+	material_left.initial_velocity_max = 200.0
+	material_left.gravity = Vector3(0, -30, 0)
+	material_left.scale_min = 4.0
+	material_left.scale_max = 10.0
+	material_left.color = Color(1.0, 1.0, 1.0, 0.8)
+	material_left.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
+	material_left.emission_sphere_radius = 8.0
+	material_left.damping_min = 10.0
+	material_left.damping_max = 20.0
 	smoke_left.process_material = material_left
+	smoke_left.texture = smoke_texture
 	add_child(smoke_left)
 	
+	# Right tire smoke
 	smoke_right = GPUParticles2D.new()
 	smoke_right.name = "SmokeRight"
 	smoke_right.emitting = false
-	smoke_right.amount = 20
-	smoke_right.lifetime = 0.8
-	smoke_right.position = Vector2(-70, -25)
+	smoke_right.amount = 50
+	smoke_right.lifetime = 1.5
+	smoke_right.position = Vector2(-55, -18)
+	smoke_right.z_index = 10
 	
 	var material_right = ParticleProcessMaterial.new()
-	material_right.direction = Vector3(0, -1, 0)
-	material_right.spread = 30.0
-	material_right.initial_velocity_min = 50.0
-	material_right.initial_velocity_max = 100.0
-	material_right.gravity = Vector3(0, -50, 0)
-	material_right.scale_min = 0.5
-	material_right.scale_max = 1.5
-	material_right.color = Color(0.8, 0.8, 0.8, 0.6)
+	material_right.direction = Vector3(-1, 0, 0)
+	material_right.spread = 60.0
+	material_right.initial_velocity_min = 100.0
+	material_right.initial_velocity_max = 200.0
+	material_right.gravity = Vector3(0, -30, 0)
+	material_right.scale_min = 4.0
+	material_right.scale_max = 10.0
+	material_right.color = Color(1.0, 1.0, 1.0, 0.8)
+	material_right.emission_shape = ParticleProcessMaterial.EMISSION_SHAPE_SPHERE
+	material_right.emission_sphere_radius = 8.0
+	material_right.damping_min = 10.0
+	material_right.damping_max = 20.0
 	smoke_right.process_material = material_right
+	smoke_right.texture = smoke_texture
 	add_child(smoke_right)
+	
 
 func load_car_data():
 	var car_data = get_node_or_null("/root/CarData")
@@ -471,13 +491,13 @@ func get_mouse_input():
 
 func update_drift_smoke():
 	# Check if car is sliding (velocity direction differs from car heading)
-	if velocity.length() > 200:
+	if velocity.length() > 150:
 		var velocity_angle = velocity.angle()
 		var heading_angle = rotation
 		var angle_diff = abs(wrapf(velocity_angle - heading_angle, -PI, PI))
 		
 		# If angle difference is significant, we're drifting
-		is_drifting = angle_diff > drift_threshold and abs(steer_angle) > 5
+		is_drifting = angle_diff > drift_threshold or (abs(steer_angle) > 15 and velocity.length() > 300)
 		
 		if smoke_left and smoke_right:
 			smoke_left.emitting = is_drifting
@@ -487,3 +507,4 @@ func update_drift_smoke():
 		if smoke_left and smoke_right:
 			smoke_left.emitting = false
 			smoke_right.emitting = false
+
