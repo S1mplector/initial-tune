@@ -1,7 +1,8 @@
-[gd_scene load_steps=15 format=3 uid="uid://b8nchxi21812j"]
+[gd_scene load_steps=16 format=3 uid="uid://b8nchxi21812j"]
 
 [ext_resource type="Texture2D" uid="uid://bcj8cefs6iwme" path="res://assets/Logo.png" id="1_chyu6"]
 [ext_resource type="Script" path="res://scenes/menu/ControlModeSelect.gd" id="control_mode_script"]
+[ext_resource type="Script" path="res://scenes/menu/TopLeftBackControls.gd" id="topleft_back_controls"]
 [ext_resource type="Texture2D" uid="uid://bcbfp2upik3n4" path="res://assets/controls/Throttle.png" id="2_5x3k5"]
 [ext_resource type="Texture2D" uid="uid://unu88hgw3vn8" path="res://assets/button/back/BackDefault.png" id="2_v3smv"]
 [ext_resource type="Texture2D" uid="uid://c5gfxyg2vm4kq" path="res://assets/button/back/BackPressed.png" id="3_h2jqw"]
@@ -22,6 +23,16 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+
+[node name="TopLeftBack" type="Button" parent="."]
+offset_left = 20.0
+offset_top = 50.0
+offset_right = 140.0
+offset_bottom = 100.0
+theme_override_fonts/font = ExtResource("3_ik442")
+theme_override_font_sizes/font_size = 28
+text = "< BACK"
+script = ExtResource("topleft_back_controls")
 
 [node name="Logo" type="Control" parent="."]
 layout_mode = 3
