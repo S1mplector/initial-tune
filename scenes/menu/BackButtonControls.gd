@@ -1,16 +1,19 @@
 extends TextureButton
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
 	pass
 
+func _input(event):
+	if event.is_action_pressed("ui_cancel"):
+		go_back()
+
 func _on_pressed():
+	go_back()
+
+func go_back():
 	var main_menu_button = get_node("/root/GameOption").main_menu_button.instantiate()
-	get_tree().get_root().find_child("Screen", true, false).add_child(main_menu_button)
-	get_tree().get_root().find_child("Controls", true, false).queue_free()
+	var screen = get_tree().get_root().find_child("Screen", true, false)
+	var controls = get_tree().get_root().find_child("Controls", true, false)
+	if screen and controls:
+		screen.add_child(main_menu_button)
+		controls.queue_free()

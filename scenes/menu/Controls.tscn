@@ -236,28 +236,28 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -200.0
-offset_top = 140.0
-offset_right = 200.0
-offset_bottom = 200.0
+offset_left = -300.0
+offset_top = 160.0
+offset_right = 300.0
+offset_bottom = 260.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Label" type="Label" parent="Control/ControlModeSelect"]
 layout_mode = 0
-offset_right = 180.0
-offset_bottom = 40.0
+offset_right = 280.0
+offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("3_ik442")
-theme_override_font_sizes/font_size = 32
+theme_override_font_sizes/font_size = 48
 text = "CONTROL MODE:"
 
 [node name="OptionButton" type="OptionButton" parent="Control/ControlModeSelect"]
 layout_mode = 0
-offset_left = 200.0
-offset_right = 400.0
-offset_bottom = 40.0
+offset_left = 300.0
+offset_right = 580.0
+offset_bottom = 60.0
 theme_override_fonts/font = ExtResource("3_ik442")
-theme_override_font_sizes/font_size = 28
+theme_override_font_sizes/font_size = 44
 item_count = 2
 selected = 0
 popup/item_0/text = "Keyboard"
