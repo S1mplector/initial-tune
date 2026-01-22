@@ -25,10 +25,9 @@ func _on_pressed():
 	update_tune(car_body, tune_data)
 	car_body.is_mouse_and_keyboard = not $"../../../Additional/Gamepad".is_pressed()
 	
-	# Check if mouse control is enabled
-	var mouse_checkbox = get_node_or_null("../../../Additional/MouseControl/MouseCheckBox")
-	if mouse_checkbox:
-		car_body.is_mouse_control = mouse_checkbox.button_pressed
+	# Use GameOption for mouse control setting
+	var game_option = get_node("/root/GameOption")
+	car_body.is_mouse_control = game_option.mouse_control_enabled
 	
 	map_instance.add_child(car_instance)
 	map_instance.gamemode = "TimeAttack"
